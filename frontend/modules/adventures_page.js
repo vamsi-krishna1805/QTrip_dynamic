@@ -5,21 +5,55 @@ import config from "../conf/index.js";
 function getCityFromURL(search) {
   // TODO: MODULE_ADVENTURES
   // 1. Extract the city id from the URL's Query Param and return it
-
+  const params= new URLSearchParams(search);
+  return params.get('city');
 }
 
 //Implementation of fetch call with a paramterized input based on city
 async function fetchAdventures(city) {
   // TODO: MODULE_ADVENTURES
   // 1. Fetch adventures using the Backend API and return the data
-
+  try{  
+    const res=await fetch(config.backendEndpoint+`/adventures?city=${city}`)
+    const result=await res.json();
+    return result;
+  }catch(err){
+    return null; 
+  }
 }
 
 //Implementation of DOM manipulation to add adventures for the given city from list of adventures
 function addAdventureToDOM(adventures) {
   // TODO: MODULE_ADVENTURES
   // 1. Populate the Adventure Cards and insert those details into the DOM
+  let dataElem=document.getElementById("data");
+  adventures.forEach(function(card){
+  let divElem=document.createElement("div");
+  divElem.classList.add("col-12","col-sm-6","col-lg-3","mb-3");
+  divElem.innerHTML=`
+  
+  <a href="detail/?adventure=${card.id}" id="${card.id}">
+  <div class="card activity-card">
+  <img src="${card.image}" >
+  <div class="category-banner">${card.category}</div>
+  <div class="card-body col-md-12 mt-2">
+  <div class="d-md-flex justify-content-between">
+  <h5>${card.name}</h5>
+  <p>${card.costPerHead} </p>
+  </div>
+  <div class="d-flex justify-content-between">
+  <p>Duration</p>
+  <p>${card.duration}</p>
+  </div> 
+  </div>
+  </div>
+  </a>
 
+  `
+
+dataElem.appendChild(divElem);
+console.log(dataElem);
+  })
 }
 
 //Implementation of filtering by duration which takes in a list of adventures, the lower bound and upper bound of duration and returns a filtered list of adventures.

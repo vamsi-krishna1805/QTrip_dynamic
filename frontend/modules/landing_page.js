@@ -18,8 +18,8 @@ async function fetchCities() {
   // 1. Fetch cities using the Backend API and return the data
 try{
   const res=await fetch(config.backendEndpoint+"/cities");
-  const data=await res.json();
-  return data;
+  return res.json();
+
 }catch{
   return (null); 
 }
@@ -31,7 +31,7 @@ function addCityToDOM(id, city, description, image) {
   // 1. Populate the City details and insert those details into the DOM
   const dataEle=document.getElementById("data");
   dataEle.innerHTML+=`
-  <div class="col-6 col-lg-3 mb-4">
+  <div class="col-6 col-lg-3 mb-3">
   <a href="pages/adventures/?city=${id}" id="${id}">
     <div class="tile">
       <div class="tile-text text-center">
