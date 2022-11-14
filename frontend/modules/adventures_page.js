@@ -48,7 +48,7 @@ function addAdventureToDOM(adventures) {
   </div>
   </div>
   </a>
-
+ 
   `
 
 dataElem.appendChild(divElem);})
