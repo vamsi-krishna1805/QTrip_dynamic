@@ -1,4 +1,4 @@
 
-const config = { backendEndpoint: "http://65.2.59.250:8082" };
+const config = { backendEndpoint: "https://vamsi-qtripdynamic.herokuapp.com" };
 
 export default config;
